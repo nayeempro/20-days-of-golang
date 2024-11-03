@@ -1,0 +1,209 @@
+// =============== Basic of fuction
+// Just Ignore the whole go code structure format just see title and code
+func functionName(parameter1 type, parameter2 type) returnType {
+    // function body
+    return result
+}
+// // Example -01
+
+package main
+
+import "fmt"
+
+func add(a int, b int) int {
+	return a + b
+}
+func main() {
+	var result = add(3, 4)
+	fmt.Print("Result is ", result)
+
+}
+
+// // Example-02
+package main
+
+import "fmt"
+
+func add(a int, b int) int {
+	return a + b
+}
+func main() {
+	result := add(3, 4)
+	fmt.Print("Result is ", result)
+
+}
+
+// //Example of Multiple Return
+package main
+
+import "fmt"
+
+func divide(a, b float64) (float64, error) {
+	if b == 0 {
+		return 0, fmt.Errorf("cannot divide by zero")
+	}
+	return a / b, nil
+}
+
+func main() {
+	result, error := divide(3, 0)
+	if error != nil {
+		fmt.Print("error is ", error)
+	} else {
+		fmt.Print("Result is ", result)
+	}
+
+}
+
+// // Named return Value(sum and product)
+// func calculate(a, b int) (sum, product int) {
+	sum = a + b
+	product = a * b
+	return // This will return sum and product
+}
+
+
+// // Variadic function:---> (Variadic functions allow you to pass a variable number of arguments of the same type to a function.)
+
+package main
+
+import "fmt"
+
+func sum(numbers ...int) int {
+	total := 0
+	for _, number := range numbers {
+		total += number
+	}
+	return total // that mean total return in sum
+}
+
+func main() {
+	Add := sum(2, 3, 4, 5, 6, 10, 20)
+	fmt.Print(Add)
+
+}
+
+
+// //Closures
+// A closure is a function value that references variables outside its own scope.
+// In Go, functions are first-class citizens, meaning you can return a function from
+// another function or pass it as an argument.
+
+
+package main
+
+import "fmt"
+
+func multiplier(x int) func(int) int {
+	return func(y int) int {
+		return x * y
+	}
+}
+
+func main() {
+	productbytwo := multiplier(2) // take 2 return a function who take and value and multiply by two
+	threebyTwo := productbytwo(3) // 3*2
+	fourbytwo := productbytwo(4)  // 4*2
+	fmt.Println(threebyTwo, fourbytwo)
+}
+
+// Anonymous Functions:
+// Go supports anonymous functions, which are functions defined without a name.
+// They’re often used as inline functions or closures.
+
+func main() {
+	func(message string) {
+		fmt.Println(message)
+	}("print whatever I write here")
+}
+
+
+// Higher-Order Functions
+// Higher-order functions are functions that take other functions as
+// parameters or return them as results.
+
+package main
+
+import "fmt"
+
+func applyOperator(x int, y int, add func(x, y int) int) int {
+	sum := add(x, y)
+	return sum
+}
+
+func main() {
+	sumTwoInt := func(a, b int) int {
+		return a + b
+	}
+	result := applyOperator(5, 6, sumTwoInt)
+	fmt.Println(result)
+}
+
+
+// Need more info about---> Error Handling in Functions/Deferred Function Calls (skip now)
+
+//  Recursion
+// Go supports recursive functions, which are functions that call themselves.
+// This can be useful for solving problems that have a recursive nature,
+// such as calculating factorials or traversing trees.
+
+
+package main
+
+import "fmt"
+
+func factorial(n int) int {
+	if n == 0 {
+		return 1
+	}
+	return n * factorial(n-1)
+}
+func main() {
+	x := factorial(5)
+	fmt.Print(x)
+}
+
+
+// ====================== Project(Basic Calculator) =========================
+package main
+
+import (
+	"fmt"
+	"strconv"
+)
+
+func add(x, y float64) float64      { return x + y }
+func subtract(x, y float64) float64 { return x - y }
+func multiply(x, y float64) float64 { return x * y }
+
+func divide(x, y float64) (float64, error) {
+	if y == 0 {
+		return 0, fmt.Errorf("cannot divide by zero")
+	}
+	return x / y, nil
+}
+
+func main() {
+	defer fmt.Println("Thank you for using the calculator!")
+
+	// Example usage
+	fmt.Println("Enter two numbers:")
+	var input1, input2 string
+	fmt.Scanln(&input1)
+	fmt.Scanln(&input2)
+
+	num1, err1 := strconv.ParseFloat(input1, 64)
+	num2, err2 := strconv.ParseFloat(input2, 64)
+
+	if err1 != nil || err2 != nil {
+		fmt.Println("Invalid input. Please enter numbers only.")
+		return
+	}
+
+	result, err := divide(num1, num2)
+	if err != nil {
+		fmt.Println("Error:", err)
+	} else {
+		fmt.Println("Result:", result)
+	}
+}
