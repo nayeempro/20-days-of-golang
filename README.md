@@ -24,3 +24,12 @@ A CLI calculator with error handling for invalid inputs.
 - `Defer` for program exit message.
 
 
+# Day-03: [Functions & Error Handling in Go](https://github.com/nayeempro/20-days-of-golang/blob/main/Day-03) 
+
+## Key Learnings
+- **Array**
+- **Slice**
+- **Map**
+
+## Project: I will add later
+
